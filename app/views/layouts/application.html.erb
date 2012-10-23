@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Back Channel Application </title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="Main_Header">
+  <h1>Back Channel Application</h1>
+  <%= form_tag :controller => 'users', :action => 'search', :method => 'get' do %>
+      <%= label_tag(:q, "Search:") %>
+      <%= text_field_tag(:q) %>
+      <% [ 'Content', 'categories', 'User Name' ].each do |c| %>
+          <br>
+          <%= radio_button_tag 'in', c %>
+          <%= c.humanize %>
+      <% end %>
+      <%= submit_tag("Search") %>
+  <% end %>
+
+  <%unless session[:user_id]%>
+      <ul class="nav">
+        <li><%= link_to :Signup , :signup, class: "nav_links"%></li>|
+        <li><%= link_to :Login , :login, class: "nav_links"%></li>
+      </ul>
+  <%else%>
+      <li><%= link_to :Logout , :logout, class: "nav_links" %></li>
+      </ul>
+  <%end%>
+</div>
+
+
+<% if flash[:color]== "valid" %>
+    <div class="valid_notice">
+      <p><%= flash[:notice]%></p>
+    </div>
+<% elsif flash[:color]== "invalid"%>
+    <div class="invalid_notice">
+      <p><%=flash[:notice]%></p>
+    </div>
+<%else%>
+    <div class="notice">
+      <p><%=flash[:notice]%></p>
+    </div>
+<%end%>
+<%= yield %>
+
+</body>
+</html>

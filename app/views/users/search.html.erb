@@ -1,0 +1,40 @@
+<h3>Search Results</h3>
+<div>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Username</th>
+      <th>Category</th>
+      </tr>
+    <% @posts.each do |result| %>
+        <tr>
+        <% if (session[:user_id]) == nil %>
+        <td><%= result.title  %></td>
+        <td><%= result.description %></td>
+        <td><%= result.user.try(:username) %></td>
+        <td><%= result.category.try(:name) %></td>
+        <br>
+         <%   else %>
+        <td><%= link_to result.title, :controller => 'posts', :action => result.id %></td>
+        <td><%= result.description %></td>
+        <td><%= result.user.try(:username) %></td>
+        <td><%= result.category.try(:name) %></td>
+
+        <% end %>
+    <% end %>
+        </tr>
+  </table>
+
+  <% if session[:user_id] == nil %>
+      <%= link_to 'Back', root_path %>
+  <% else %>
+      <% if adminornot %>
+          <%= link_to 'Back', users_path %>
+      <% else %>
+          <%= link_to 'Back', posts_path %>
+      <% end %>
+  <% end %>
+
+
+</div>

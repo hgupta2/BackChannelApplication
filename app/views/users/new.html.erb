@@ -1,0 +1,45 @@
+<% @page_title = "Back Channel Application" -%>
+<div class= "Sign_Form">
+  <h3>Sign Up</h3><h5>(All * marked fields are mandatory)</h5>
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+
+      <p>
+        First name*:</br> <%= f.text_field :fname%>
+      </p>
+
+      <p>
+        Last name*:</br> <%= f.text_field :lname%>
+      </p>
+
+      <p>
+        Date of Birth(mm/dd/yyyy)*:</br> <%= f.text_field :dob%>
+      </p>
+
+      <p>
+        Username*:</br> <%= f.text_field :username%>
+      </p>
+
+      <p>
+        Email*:</br> <%= f.text_field :email%>
+      </p>
+
+      <p>
+        Password*(at least 6 characters):</br> <%= f.password_field :password%>
+      </p>
+
+      <p>
+        Password Confirmation*:</br> <%= f.password_field :password_confirmation%>
+      </p>
+
+
+      <%= f.submit :Signup %>
+  <% end %>
+      <%= button_to 'Cancel', root_path %>
+  <% if @user.errors.any? %>
+      <ul class="Signup_Errors">
+        <% for message_error in @user.errors.full_messages %>
+            <li>* <%= message_error %></li>
+        <% end %>
+      </ul>
+  <% end %>
+</div>

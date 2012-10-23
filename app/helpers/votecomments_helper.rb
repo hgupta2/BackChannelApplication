@@ -1,0 +1,2 @@
+module VotecommentsHelper
+end

@@ -1,0 +1,17 @@
+<h1>Listing votecomments</h1>
+
+<table>
+  <tr>
+    <th>Username</th>
+    </tr>
+
+<% @votecomments.each do |votecomment| %>
+  <tr>
+    <td><%= votecomment.user.try(:username) %></td>
+     </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', posts_path %>

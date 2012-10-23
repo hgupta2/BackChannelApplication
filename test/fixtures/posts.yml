@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: Android1
+  description: test1!!
+  total_votes: 1
+
+two:
+  title: Windows8
+  description: Windows is evergreen!
+  total_votes: 1

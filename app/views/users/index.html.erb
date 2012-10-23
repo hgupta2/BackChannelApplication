@@ -1,0 +1,47 @@
+<h1>Admin</h1>
+<h3>Listing users</h3>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Date of Birth</th>
+    <th>Email</th>
+    <th>Admin</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.username %></td>
+    <td><%= user.fname %></td>
+    <td><%= user.lname %></td>
+    <td><%= user.dob %></td>
+    <td><%= user.email %></td>
+    <td><%= user.admin %></td>
+    <% if !(user.main_admin || user.id == session[:user_id ]) %>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+    </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "Show all categories", categories_url %>
+<br>
+<br>
+<%= link_to "Show all Posts", posts_url %>
+<br>
+<br>
+<%= link_to 'Users Report', :report %>
+<br>
+<br>
+<%= link_to 'Posts Report', :reportpost %>
+
+
+

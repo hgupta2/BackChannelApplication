@@ -1,0 +1,25 @@
+<h3>Posts Report</h3>
+
+<table>
+  <tr>
+    <th>Post Title</th>
+    <th>Created by</th>
+    <th>Total Votes on User's posts</th>
+    <th>Total Comments</th>
+    </tr>
+
+  <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.user.username %></td>
+        <td><%= Vote.count_by_sql"SELECT COUNT(*) FROM Votes Where Votes.post_id = #{post.id} " %></td>
+        <td><%= Comment.count_by_sql"SELECT COUNT(*) FROM Comments Where Comments.post_id = #{post.id} " %></td>
+        </tr>
+  <% end %>
+
+
+</table>
+
+<br />
+
+<%= link_to 'Back', users_url %>

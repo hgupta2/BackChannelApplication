@@ -1,0 +1,18 @@
+<h1>Listing votes</h1>
+
+<table>
+  <tr>
+    <th>Username</th>
+  </tr>
+
+<% @votes.each do |vote| %>
+  <tr>
+    <td><%= vote.user.try(:username) %></td>
+    </tr>
+<% end %>
+</table>
+
+<br />
+
+
+<%= link_to 'Back', posts_path %>

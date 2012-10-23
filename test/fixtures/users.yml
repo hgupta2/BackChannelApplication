@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  username: hemant
+  fname: Hemant
+  lname: Gupta
+  dob: 05/11/1989
+  email: hemant@ncsu.edu
+  salt: $2a$10$jt6gKPOaPLrn/uL8Zk3/ee
+  encrypted_password: $2a$10$jt6gKPOaPLrn/uL8Zk3/ee9ntH0GQlIILDBzRs.emia2uzjU45eGy
+  admin: t
+
+two:
+  username: sneh
+  fname: Sneh
+  lname: Kumar Singh
+  dob: 05/11/1989
+  email: sneh@ncsu.edu
+  salt: $2a$10$xXCn4C.hC0ohBjLda4gpeu
+  encrypted_password: $2a$10$xXCn4C.hC0ohBjLda4gpeultsR0/5c/3UbrpClTPumELBv2zxb3MO
+  admin: f

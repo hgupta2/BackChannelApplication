@@ -1,0 +1,92 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<% if (@post.votecheck?(session[:user_id], @post.id)) %>
+
+<%= form_for(@vote) do |f| %>
+    <% if @vote.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+          <ul>
+            <% @vote.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :post_id %>
+
+    <div class="actions">
+      <%= f.submit "Vote" %>
+    </div>
+<% end %>
+<% end %>
+
+<p>
+  <b>Description:</b>
+  <%= @post.description %>
+</p>
+
+<p>
+  <b>Total votes:</b>
+  <%= @post.get_totalvote(@post.id) %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <br>
+  <% Comment.all.collect{ |c| [c.description, c.post_id ] %>
+      <% if (c.post_id == @post.id) %>
+          <%= c.description %>
+          <br>
+          <%= "Posted by " + c.user.username %>
+          <br>
+          <%= link_to @post.get_votecomment_count(session[:user_id], c.id), :controller => "votecomments", :action => "index", :comment_id => c.id %>
+          <% if (@post.votecommentcheck?(session[:user_id], c.id)) %>
+              <% @votecomment = Votecomment.new( :comment_id => c.id )%>
+              <%= form_for(@votecomment) do |f| %>
+                  <% if @votecomment.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+                      <ul>
+                        <% @vote.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                <% end %>
+                <%= f.hidden_field :comment_id %>
+
+                <div class="actions">
+                  <%= f.submit "Vote" %>
+                </div>
+            <% end %>
+          <% end %>
+
+          <%= link_to 'Edit', edit_comment_path(c) %>
+          <%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <br>
+      <% end } %>
+</p>
+
+<%= form_for(@comment) do|f| %>
+    <%= f.hidden_field :post_id %>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="field">
+      <%= f.submit "Post Comment" %>
+    </div>
+<% end %>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
